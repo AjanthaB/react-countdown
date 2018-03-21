@@ -10,8 +10,8 @@ class App extends Component {
 		super(propeties);
 
 		this.state = {
-			deadline: moment().add('days', 5).format("MMMM-DD-YYYY"),
-			today: moment().format("YYYY-MM-DD")
+			deadline: moment().add(5 ,'days').format("MMMM-DD-YYYY"),
+			today: moment().add(1, 'days').format("YYYY-MM-DD")
 		}
 
 		console.log(this.state);

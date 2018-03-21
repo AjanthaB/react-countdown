@@ -5,6 +5,8 @@ import * as moment from 'moment';
 
 class Clock extends Component {
 	
+	timeInterval;
+
 	constructor(props) {
 		super(props);
 
@@ -21,7 +23,7 @@ class Clock extends Component {
 	}
 
 	componentDidMount() {
-		setInterval(() => this.setRemainingTime(this.props.deadline), 1000);
+		this.timeInterval = setInterval(() => this.setRemainingTime(this.props.deadline), 1000);
 	}
 
 	setleading0(num) {
@@ -37,6 +39,11 @@ class Clock extends Component {
 		const days = Math.floor(remainTime/(1000 * 60 * 60 * 24));
 
 		this.setState({days, seconds, minutes, hours});
+
+		if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
+			clearInterval(this.timeInterval);
+			alert("Countdown Completed");
+		} 
 	}
 
 	render() {
