@@ -2,20 +2,25 @@ import React, { Component } from 'react';
 import Clock from "./Clock.jsx";
 import './App.css'
 
+import * as moment from 'moment';
+
 class App extends Component {
 
 	constructor(propeties) {
 		super(propeties);
 
 		this.state = {
-			deadline: "2018-12-25",
-			today: new Date()
+			deadline: moment().add('days', 5).format("MMMM-DD-YYYY"),
+			today: moment().format("YYYY-MM-DD")
 		}
+
+		console.log(this.state);
 	}
 
 	onChangeDate(value) {
+		const d = moment(value, 'YYYY-MM-DD').format("MMMM-DD-YYYY")
 		this.setState({
-			deadline: value
+			deadline: d
 		});
 	}
 	
@@ -30,7 +35,7 @@ class App extends Component {
 					deadline={this.state.deadline}
 				/>
 				<div>
-					<input min={this.state.today} onChange={event => this.onChangeDate(event.target.value)} type="date" placeholder="new date"/>
+					<input  min={this.state.today} onChange={event => this.onChangeDate(event.target.value)} type="date" placeholder="new date"/>
 				</div>
 			</div>
 		)

@@ -1,5 +1,6 @@
 import React, { Component  } from "react";
 import './App.css';
+import * as moment from 'moment';
 
 
 class Clock extends Component {
@@ -28,7 +29,8 @@ class Clock extends Component {
 	}
 
 	setRemainingTime(deadline) {
-		const remainTime = Date.parse(deadline) - Date.parse(new Date());
+		const newDate = moment(deadline, "MMMM-DD-YYYY").format('YYYY-MM-DD');
+		const remainTime = Date.parse(newDate) - Date.parse(new Date());
 		const seconds = Math.floor((remainTime / 1000) % 60);
 		const minutes = Math.floor((remainTime / (1000 * 60)) % 60);
 		const hours = Math.floor((remainTime / (1000 * 60 * 60)) % 60);
